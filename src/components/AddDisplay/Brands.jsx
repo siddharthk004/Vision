@@ -26,9 +26,9 @@ function Brands() {
     
 ];
 return (
-  <div className="w-full bg-zinc-100 h-[17vh] overflow-auto pt-3 relative">
+  <div className="w-full bg-zinc-100 h-full pb-6 gap-4 overflow-auto pt-3 relative">
     {/* Wrapper with animation */}
-    <div className="flex w-max animate-scroll">
+    <div className="flex flex-wrap w-full">
       {data.map((item, index) => (
         <Brand key={index} data={item} />
       ))}

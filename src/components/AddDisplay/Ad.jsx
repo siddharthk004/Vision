@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { image } from "../../assets/poster.png";
+import React, { useEffect, useState } from "react";
 
-function Ad() {
+import function Ad() {
   const data = [
     {
       url: "https://content.jdmagicbox.com/v2/comp/kathua/l7/9999p1922.1922.231118080920.c1l7/catalogue/choudhary-seeds-fertilizer-and-pesticides-store-kharote-kathua-agricultural-product-wholesalers-v57ej8ianp.jpg",
@@ -39,18 +40,22 @@ function Ad() {
 
   return (
     <div className="flex justify-center items-center">
-      {data.slice(currentIndex, currentIndex + 2).map((item, index) => (
-        <img
-          key={index}
-          className={`h-[65vh] w-[50vw] border-t-[1px] border-b-[1px] overflow-hidden border-zinc-900 transition-opacity duration-500 ${
-            isAnimating ? "opacity-50" : "opacity-100"
-          }`}
-          src={item.url}
-          alt=""
-        />
-      ))}
+      {/* {data.slice(currentIndex, currentIndex + 2).map((item, index) => (
+                              <img
+                                key={index}
+                                className={`h-[65vh] w-[50vw] border-t-[1px] border-b-[1px] overflow-hidden border-zinc-900 transition-opacity duration-500 ${
+                                  isAnimating ? "opacity-50" : "opacity-100"
+                                }`}
+                                src={item.url}
+                                alt=""
+                              />
+                            ))} */}
+      <img
+        className="h-[65vh] w-[50vw] border-t-[1px] border-b-[1px] overflow-hidden border-zinc-900 transition-opacity duration-500"
+        src={image}
+        alt="" />
     </div>
   );
-}
-
+};
+ 
 export default Ad;

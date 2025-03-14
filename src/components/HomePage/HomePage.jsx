@@ -9,14 +9,14 @@ import Show from "../AddDisplay/Show";
 import Offers from "../Category/Offers";
 import Farmer from "../AddDisplay/Farmer";
 import Brands from "../AddDisplay/Brands";
-import Abouts from "../Home/Abouts";
+import Abouts from "../About/Abouts";
 import GrowthAds from "../AddDisplay/GrowthAds";
-import Stripes from "../AddDisplay/Stripes";
+import Stripes from "../AddDisplay/Stripes"; 
 import StripesDet from "../AddDisplay/StripesDet";
 
 function HomePage() {
   return (
-    <div className="bg-green-400">
+    <div className="bg-zinc-100 w-screen overflow-hidden">
       {/* Home Screen Their having main navbar and only navbar */}
       <Home />
       <br />
@@ -29,7 +29,6 @@ function HomePage() {
       {/* Category Section Their having category of what we sell */}
       <Exclusive value={"Category"} />
       <Categorys />
-      <br />
       {/* Offer Screen  having Offer section in their are some products are on sell only for today */}
       <Exclusive value={"-- Special Offer On Pesticides Only --"} />
       <SellingOffer />

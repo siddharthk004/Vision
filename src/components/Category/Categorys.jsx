@@ -50,7 +50,7 @@ function Categorys() {
     },
   ];
   return (
-    <div className="flex">
+    <div className="flex flex-wrap justify-between">
       {data.map((item,index) => (
         <Category data={item} index={index} key={index}/>
       ))}

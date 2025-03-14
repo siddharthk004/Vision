@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from '../../Axios';
-import Cardboost from '../Card/Cardboost';
+import Cardboost from '../Card';
 
 function Show() {
     
@@ -10,7 +10,7 @@ function Show() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios().get('/user/ViewAllBooster'); // Replace with your actual API endpoint
+        const response = await Axios().post('/user/product'); // Replace with your actual API endpoint
         setData(response.data); // Set the fetched data in state
       } catch (error) {
         console.error('Error fetching data:', error);
