@@ -32,7 +32,7 @@ import GrowthAdd from "./Admin/AddManage/GrowthAdd";
 import SupportRequest from "./Admin/HelpDesk/SupportRequest";
 import OrderHistory from "./Admin/HelpDesk/OrderHistory";
 import OrderManagement from "./Admin/HelpDesk/OrderManagement";
-import AddProduct from "./Admin/ProductManage/AddProduct";
+// import AddProduct from "./Admin/ProductManage/AddProduct";
 function App() {
   return (
     <Routes>
@@ -63,7 +63,7 @@ function App() {
         <Route path="team" element={<Team />} />
         <Route path="setting" element={<Setting />} />
 
-        <Route path="Product/add" element={<AddProduct />} />
+        {/* <Route path="Product/add" element={<AddProduct />} /> */}
         <Route path="Product/update" element={<UpdateProduct />} />
         <Route path="Product/view" element={<ViewProduct />} />
         <Route path="Product/stock" element={<StockView />} />
