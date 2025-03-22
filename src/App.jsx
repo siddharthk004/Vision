@@ -21,7 +21,7 @@ import AdminDashboard from "./Admin/Layout/AdminDashboard";
 import HomeAdmin from "./Admin/Dashboard/HomeAdmin";
 import Team from "./Admin/Dashboard/Team";
 import Setting from "./Admin/Dashboard/Setting";
-import AddProduct from "./Admin/ProductManage/Addproduct";
+// import addproduct from "./Admin/ProductManage/AddProduct";
 import UpdateProduct from "./Admin/ProductManage/UpdateProduct";
 import ViewProduct from "./Admin/ProductManage/ViewProduct";
 import StockView from "./Admin/ProductManage/StockView";
@@ -32,6 +32,7 @@ import GrowthAdd from "./Admin/AddManage/GrowthAdd";
 import SupportRequest from "./Admin/HelpDesk/SupportRequest";
 import OrderHistory from "./Admin/HelpDesk/OrderHistory";
 import OrderManagement from "./Admin/HelpDesk/OrderManagement";
+import AddProduct from "./Admin/ProductManage/AddProduct";
 function App() {
   return (
     <Routes>
