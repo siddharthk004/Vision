@@ -21,17 +21,17 @@ import AdminDashboard from "./Admin/Layout/AdminDashboard";
 import HomeAdmin from "./Admin/Dashboard/HomeAdmin";
 import Team from "./Admin/Dashboard/Team";
 import Setting from "./Admin/Dashboard/Setting";
-import AddProduct from "./Admin/Product Manage/Addproduct";
-import UpdateProduct from "./Admin/Product Manage/UpdateProduct";
-import ViewProduct from "./Admin/Product Manage/ViewProduct";
-import StockView from "./Admin/Product Manage/StockView";
-import HomePageAdd from "./Admin/Add Manage/HomePageAdd";
-import LogoManagement from "./Admin/Add Manage/LogoManagement";
-import SponsorsAdd from "./Admin/Add Manage/SponsorsAdd";
-import GrowthAdd from "./Admin/Add Manage/GrowthAdd";
-import SupportRequest from "./Admin/Help Desk/SupportRequest";
-import OrderHistory from "./Admin/Help Desk/OrderHistory";
-import OrderManagement from "./Admin/Help Desk/OrderManagement";
+import AddProduct from "./Admin/ProductManage/Addproduct";
+import UpdateProduct from "./Admin/ProductManage/UpdateProduct";
+import ViewProduct from "./Admin/ProductManage/ViewProduct";
+import StockView from "./Admin/ProductManage/StockView";
+import HomePageAdd from "./Admin/AddManage/HomePageAdd";
+import LogoManagement from "./Admin/AddManage/LogoManagement";
+import SponsorsAdd from "./Admin/AddManage/SponsorsAdd";
+import GrowthAdd from "./Admin/AddManage/GrowthAdd";
+import SupportRequest from "./Admin/HelpDesk/SupportRequest";
+import OrderHistory from "./Admin/HelpDesk/OrderHistory";
+import OrderManagement from "./Admin/HelpDesk/OrderManagement";
 function App() {
   return (
     <Routes>
