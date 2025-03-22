@@ -25,7 +25,7 @@ import Setting from "./Admin/Dashboard/Setting";
 import UpdateProduct from "./Admin/ProductManage/UpdateProduct";
 import ViewProduct from "./Admin/ProductManage/ViewProduct";
 import StockView from "./Admin/ProductManage/StockView";
-import HomePageAdd from "./Admin/AddManage/HomePageAdd";
+// import HomePageAdd from "./Admin/AddManage/HomePageAdd";
 import LogoManagement from "./Admin/AddManage/LogoManagement";
 import SponsorsAdd from "./Admin/AddManage/SponsorsAdd";
 import GrowthAdd from "./Admin/AddManage/GrowthAdd";
@@ -68,7 +68,7 @@ function App() {
         <Route path="Product/view" element={<ViewProduct />} />
         <Route path="Product/stock" element={<StockView />} />
 
-        <Route path="AddManagement/HomePageAdd" element={<HomePageAdd />} />
+        {/* <Route path="AddManagement/HomePageAdd" element={<HomePageAdd />} /> */}
         <Route path="AddManagement/Logo" element={<LogoManagement />} />
         <Route path="AddManagement/SponsorsAdd" element={<SponsorsAdd />} />
         <Route path="AddManagement/GrowthAdd" element={<GrowthAdd />} />
