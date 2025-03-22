@@ -1,0 +1,8 @@
+.cut-bottom-left {
+    width: 4.5vw;
+    height: 1.7vw;
+    background-color: rgb(231, 122, 45);
+    color:white;
+    border-bottom-right-radius: 200px; /* Adjust this for more/less curve */
+  }
+  

@@ -1,85 +1,108 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Axios from '../Axios';
-import Home from '../components/Home';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';  // Don't forget to import the Toastify CSS!
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Axios from "../Axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Don't forget to import the Toastify CSS!
+import MainNavbar from "../components/Home/MainNavbar";
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   // Update handleSubmit to be async
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (username === '' || password === '') {
-      toast.error('Please enter both username and password',{autoClose:2000,});
+    if (username === "" || password === "") {
+      toast.error("Please enter both username and password", {
+        autoClose: 2000,
+      });
       return;
     }
 
     try {
-      // Make the API call using the custom Axios instance
       const response = await Axios().post("/user/login", {
         username,
         password,
       });
 
       if (response.status === 200) {
-        // Navigate to the dashboard or home after successful login
-       
-        
-        navigate('/'); // Adjust this route to where you want to navigate
+        // Save email in localStorage (assuming API response includes an email field)
+        localStorage.setItem("token", response.token);
+
+        // Navigate to another page (e.g., Home or Profile)
+        navigate("/");
       } else {
-        toast.error('Invalid username or password');
+        toast.error("Invalid username or password");
       }
     } catch (error) {
-      // Handle any errors from the API call
-      console.error('Error during login:', error);
-      toast.error('Something went wrong. Please try again.');
+      console.error("Error during login:", error);
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
   return (
     <div>
-      <Home />
-      <div className="bg-green-300 w-full h-[83.5vh] pt-40 pl-[80vh] m-auto bg-gradient-to-l from-green-300 via-white to-orange-300">
-        <div className="bg-blue-100 h-[50vh] w-[40vh] border-2 border-gray-300 rounded-3xl shadow-2xl shadow-zinc-600">
-          <h1 className="text-4xl font-bold text-center mt-3">Login</h1>
+      <MainNavbar />
+      <div className="pt-[10vw] pl-[35vw] m-auto">
+        <div className="bg-zinc-100 w-[30vw] border-[.1vw] border-gray-300 rounded-[1vw]">
+          <h1 className="text-[2vw] font-bold text-center mt-[1vw]">Login</h1>
 
           <form onSubmit={handleSubmit}>
-            <h1 className="text-2xl font-semibold mt-10 ml-4">Username</h1>
+            <p className="text-[1.4vw] mt-[1vw] flex font-semibold ml-[2vw]">
+              Username <p className="text-red-700">*</p>
+            </p>
             <input
               type="text"
+              placeholder="Enter Your Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-[30vh] ml-10 px-5 py-2 mt-5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
+              className="text-[1.2vw] w-[25vw] ml-[3vw] px-[.6vw] py-[.6vw] mt-[1vw] border-[.1vw] border-gray-300 rounded-[.6vw] focus:outline-none focus:ring focus:ring-blue-200"
             />
+            {/* Password Label */}
+            <p className="text-[1.4vw] mt-[1vw] flex font-semibold ml-[2vw]">
+              Password <span className="text-red-700 ml-1">*</span>
+            </p>
 
-            <h1 className="text-2xl font-semibold mt-10 ml-4">Password</h1>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-[30vh] ml-10 px-5 py-2 mt-5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-            />
+            {/* Password Input with Show/Hide Button */}
+            <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              className="text-[1.2vw] w-[25vw] ml-[3vw] px-[.6vw] py-[.6vw] mt-[1vw] border-[.1vw] border-gray-300 rounded-[.6vw] focus:outline-none focus:ring focus:ring-blue-200"
+              />
+              <button
+                type="button"
+                className="absolute right-10 top-[2.5vw] opacity-50 transform -translate-y-1/2 text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            <p className="ml-[18vw] text-[1.1vw]">
+              <Link>Forgot Password ?</Link>
+            </p>
 
             <button
               type="submit"
-              className="hover:bg-green-700 hover:text-white bg-green-600 h-14 w-40 m-8 ml-[12vh] rounded-3xl text-xl font-bold text-zinc-700"
+              className="hover:bg-green-700 bg-green-600 h-[3vw] w-[8vw] ml-[11vw] mt-[1vw] rounded-[1vw] text-[1.2vw] font-bold text-white"
             >
               Submit
             </button>
           </form>
 
-          <h1 className="ml-10">
+          <p className="text-[1.2vw] m-[1vw] ml-[7vw]">
             or Sign Up using
-            <Link to="/signup" className="text-xl ml-6 underline">
+            <Link to="/signup" className="text-[1.2vw] ml-[.3vw] underline">
               Signup
             </Link>
-          </h1>
+          </p>
+          <Link to="/admin/login" className="text-[1vw] font-lightbold ml-[1vw] mt-[1vw] underline">Admin Login</Link>
         </div>
       </div>
 

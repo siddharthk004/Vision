@@ -9,27 +9,25 @@ import Show from "../AddDisplay/Show";
 import Offers from "../Category/Offers";
 import Farmer from "../AddDisplay/Farmer";
 import Brands from "../AddDisplay/Brands";
-import Abouts from "../Home/Abouts";
+import Abouts from "../About/Abouts";
 import GrowthAds from "../AddDisplay/GrowthAds";
-import Stripes from "../AddDisplay/Stripes";
+import Stripes from "../AddDisplay/Stripes"; 
 import StripesDet from "../AddDisplay/StripesDet";
+import "./index.css"; // Import CSS for hiding scrollbar
 
-function HomePage() {
+function HomePage() { 
   return (
-    <div className="bg-green-400">
+    <div className="bg-zinc-100 overflow-hidden no-scrollbar h-screen overflow-y-scroll">
       {/* Home Screen Their having main navbar and only navbar */}
       <Home />
-      <br />
       {/* Ads Screen Their having Images Are Moving */}
       <Ads />
-      <br />
       {/* stripe that having condition and some text */}
-      <Stripes />
-      <br />
+      {/* <br /> */}
       {/* Category Section Their having category of what we sell */}
-      <Exclusive value={"Category"} />
+      <Exclusive value={"Categories"} />
       <Categorys />
-      <br />
+      <Stripes />
       {/* Offer Screen  having Offer section in their are some products are on sell only for today */}
       <Exclusive value={"-- Special Offer On Pesticides Only --"} />
       <SellingOffer />
@@ -44,11 +42,9 @@ function HomePage() {
       <Exclusive value={" Best Selling Of The Day"} />
       <Selling />
 
-      <div className="bg-zinc-100 h-10 w-full"/>
+      <div className="bg-zinc-100 h-10 w-full"/>  
       {/* growth Screen  having growth pesticide recommandation */}
       <GrowthAds />
-      <div className="bg-green-100 h-10 w-full"/>
-
       {/* growth Section  having need for growth products */}
       <Exclusive value={"Growth Promoters"} />
       <Show />
@@ -56,7 +52,7 @@ function HomePage() {
       <Exclusive value={" Brands "} />
       <Brands />
       {/* Stripe Detail having they sell to how many and count of product brand  */}
-      <StripesDet />
+      {/* <StripesDet /> */}
       {/* about section having all conditions and links are all stuff are in the about section */}
       <Abouts />
     </div>

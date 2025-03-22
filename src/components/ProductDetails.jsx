@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Axios from "../Axios";
 import Home from "./Home";
 import { RiSecurePaymentLine } from "react-icons/ri";
@@ -16,6 +16,7 @@ import Detail from "./Detail";
 function ProductDetails() {
   const [product, setproduct] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
   const [count, setcount] = useState(1);
   const getsingleProduct = async () => {
     try {
@@ -25,6 +26,51 @@ function ProductDetails() {
       console.log(e);
     }
   };
+  const checkEmailAndRedirect = () => {
+    const email = localStorage.getItem("email");
+    if (!email) {
+      navigate("/signin"); // Redirect to login if email is missing
+      return null;
+    }
+    return email;
+  };
+  
+  const addToCart = async () => {
+    const email = checkEmailAndRedirect();
+    if (!email || isCartAdded) return; // Prevent execution if email is missing or already added
+
+    const cartData = {
+      productname: data?.productName || "Unknown",
+      productcompanyname: data?.productCompanyName || "Unknown",
+      productimage: data?.productImage || "placeholder.jpg",
+      beforediscount: data?.beforediscount || 0,
+      afterdiscount: data?.afterdiscount || 0,
+      discount: data?.discount || 0,
+    };
+
+    try {
+      const response = await Axios().post(
+        `/user/cart`,
+        cartData,
+        {
+          params: { email }, // Pass email as a query parameter
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Response:", response.data);
+      setIsCartAdded(true); // Mark product as added to the cart
+    } catch (error) {
+      console.error("Error adding to cart:", error.response?.data || error.message);
+    }
+  };
+
+  const handlePayment = () => {
+    const email = checkEmailAndRedirect();
+      if (!email) return; // Prevent execution if email is missing or already added
+    navigate("/payment", { state: { count, productname:product.productName, afterdiscount:product.afterdiscount } });
+  }; 
 
   const handleCount = () => {
     if(count > 1) {
@@ -36,22 +82,21 @@ function ProductDetails() {
     getsingleProduct();
   }, []);
   return (
-    <div>
+    <div className="h-full">
       <Home />
-      <div className="w-full h-[60vh] flex">
-        <div className="h-[70vh] w-[40vh]"></div>
-        <div className="bg-white h-[70vh]">
+      <div className="w-full justify-center mt-[3%] flex">
+        <div className="h-[20%] ">
           <img src={product.productImage} className="h-full p-10"></img>
         </div>
-        <div className="h-[70vh] w-1/3">
-          <h1 className=" mt-40 text-5xl font-bold">{product.productName}</h1>
-          <h1 className="text-xl mt-5 m-4 font-semibold">
+        <div className="h-[20%] w-1/3">
+          <h1 className=" text-[200%] font-bold">{product.productName}</h1>
+          <h1 className="text-xl mt-1 m-4 font-semibold">
             {product.productCompanyName}
           </h1>
-          <h1 className="flex text-3xl mt-5 m-4 font-semibold text-green-600">
+          <h1 className="flex text-[140%] mt-2 m-4 font-semibold text-green-600">
             {product.afterdiscount}
             <MdCurrencyRupee className="mt-[5px] ml-1" />{" "}
-            <h1 className="ml-2 text-red-400 text-xl flex">
+            <h1 className="ml-2 text-red-400 text-[80%] flex">
               {" "}
               <s>{product.beforediscount}</s>
               <MdCurrencyRupee className="mt-[5px] ml-1" />
@@ -63,7 +108,7 @@ function ProductDetails() {
             <MdCurrencyRupee className="mt-[5px] ml-1" />
           </h1>
 
-          <div className="flex w-60 h-14 border-2 border-zinc-900 mt-10 m-6">
+          <div className="flex w-60 h-14 border-2 border-zinc-900 mt-[4%] m-6">
             <button className="w-1/3 h-full bg-red-200">
               <FaMinus
                 className="w-full h-[3vh] mt-2"
@@ -97,13 +142,13 @@ function ProductDetails() {
             In stock, Ready to Ship
           </h1>
 
-          <div className="flex mt-6">
-            <div className="rounded-md bg-green-700 text-xl text-white h-13 w-30 mr-6 flex border-green-500 border">
+          <div className="flex mt-2">
+            <button onClick={addToCart} className="rounded-md bg-green-700 text-xl text-white h-13 w-30 mr-6 flex border-green-500 border">
               <h1 className="mt-2 ml-3 mr-3 font-bold">Add to Cart</h1>
-            </div>
-            <div className="rounded-md bg-blue-600 text-white h-12 text-xl w-30 flex border-green-500 border">
+            </button>
+            <button onClick={handlePayment} className="rounded-md bg-blue-600 text-white h-12 text-xl w-30 flex border-green-500 border">
               <h1 className="mt-2 ml-3 mr-3 font-bold">Buy Now</h1>
-            </div>
+            </button>
           </div>
         </div>
       </div>

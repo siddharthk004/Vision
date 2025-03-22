@@ -3,9 +3,9 @@ import Stripe from "./Stripe";
 
 function Stripes() {
   var data = [
-    "Safe And Secure", "Payments" ,
-    "Best Price", "Assured" ,
-    "Expert Advice", "& Trusted",
+    "Safe And Secure Payments" ,
+    "Best Price Assured" ,
+    "Expert Advice & Trusted",
   ];
   return <div>
     <Stripe data={data} />
