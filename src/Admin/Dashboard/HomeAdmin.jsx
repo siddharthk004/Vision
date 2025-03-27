@@ -32,16 +32,18 @@ function HomeAdmin() {
   };
 
   return (
-    <div className="overflow-hidden bg-gray-100 pl-[.5vw]">
+    <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
-      <ToastContainer />
-
-      <div className="flex items-center gap-2 mt-[3vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">Dashboard</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm font-semibold">Setting</h6>
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Dashboard</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Home</h6>
+        </div>
       </div>
+      <ToastContainer />
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 p-[1vw] lg:grid-cols-4 gap-4 mt-4">
@@ -89,10 +91,10 @@ function HomeAdmin() {
               className="border-0 rounded-[1vw] text-dark p-3"
             >
               <div className="d-flex flex">
-                <div className="w-50">
-                  <h6 className=" text-body-tertiary opacity-75">
+                <div className="w-20">
+                  <p className="text-[1vw] w-[9vw] text-body-tertiary opacity-75">
                     {item.title1}
-                  </h6>
+                  </p>
                   <h4 className="text-[1.2vw]">{item.title2}</h4>
                 </div>
                 <div className="w-50 ml-[10vw] h-[1vw] pt-[1vw]">

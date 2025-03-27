@@ -1,107 +1,85 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Axios from "../../Axios";
-import Cardpest from "../Card";
-
 function Navbar() {
-  const [name,setname] = useState('');
-  const [query, setquery] = useState("");
-  const [result, setresult] = useState([]);
-  const [noresult, setnoresult] = useState(false);
-  const [loading, setleading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [result, setResult] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     if (!query.trim()) {
-      setresult([]);
-      setnoresult(false);
+      setResult([]);
+      setShowPopup(false);
       return;
     }
-    setleading(true);
-    setnoresult(false);
+    setLoading(true);
+    setShowPopup(true);
 
     try {
-      const response = await Axios().get(`/search/${query}`, {
-        params: { q: query },
-      });
-      setresult(response.data);
+      const response = await Axios().get(`/user/search/${query}`);
+      setResult(response.data);
 
       if (response.data.length === 0) {
-        setnoresult(true);
+        setShowPopup(false);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Search Error:", error);
     } finally {
-      setleading(false);
+      setLoading(false);
     }
   };
 
-  // Use useEffect to call search function dynamically whenever `query` changes
+  // Call API when user types
   useEffect(() => {
-    console.log(name);
-    if (query) {
+    const delayDebounceFn = setTimeout(() => {
       handleSearch();
-    } else {
-      setresult([]);
-      setnoresult(false); // Reset state when query is empty
-    }
-  }, [query]); // Effect depends on `query`
+    }, 500); // Delay to avoid excessive API calls
 
-  // Handle input change (e.g., typing in the search box)
-  const handleInputChange = (e) => {
-    setquery(e.target.value);  // Update the query state dynamically as user types
-  };
+    return () => clearTimeout(delayDebounceFn);
+  }, [query]);
 
   return (
-    <div className="">
-      <div className="pt-[4%]  w-screen h-27  flex flex-wrap overflow-auto justify-between">
+    <div className="relative">
+      <div className="pt-[4%] w-screen h-27 flex flex-wrap overflow-auto justify-between">
         <div className="flex pl-[1.5vw] gap-[1.4vw] pt-[1vw]">
-          <Link to="/" className="">
-            <p className="text-[1.2vw] font-lightbold text-zinc-800">Home</p>
-          </Link>
-          <Link to="/profileSection" className="">
-            <p className="text-[1.2vw] font-lightbold text-zinc-800">Profile</p>
-          </Link>
-          <Link to="/pesticide" className="">
-            <p className="text-[1.2vw] font-lightbold text-zinc-800">Products</p>
-          </Link>
-          <Link to="/help" className="">
-            <p className="text-[1.2vw] font-lightbold text-zinc-800">Help</p>
-          </Link>
-          <Link to="/help" className="">
-            <p className="text-[1.2vw] font-lightbold text-zinc-800">About</p>
-          </Link>
+          <Link to="/" className="text-[1.2vw] font-lightbold text-zinc-800">Home</Link>
+          <Link to="/profileSection" className="text-[1.2vw] font-lightbold text-zinc-800">Profile</Link>
+          <Link to="/pesticide" className="text-[1.2vw] font-lightbold text-zinc-800">Products</Link>
+          <Link to="/help" className="text-[1.2vw] font-lightbold text-zinc-800">Help</Link>
         </div>
         
         <div className="m-[.7vw] w-[30vw] max-w-md h-[2.5vw] flex gap-5">
           <input
             type="text"
             value={query}
-            onChange={handleInputChange}
-            
-            className="w-full px-[3vw] py-[1vw] text-[1vw] border rounded-[.5vw] shadow-md focus:outline-none focus:ring focus:ring-blue-100 border-zinc-400 "
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full px-[3vw] py-[1vw] text-[1vw] border rounded-[.5vw] shadow-md focus:outline-none focus:ring focus:ring-blue-100 border-zinc-400"
             placeholder="Search..."
           />
         </div>
       </div>
 
-      {loading && <p>Loading...</p>}
-
-      {/* Conditionally render the results or set height to 0 */}
-      <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden ${
-          noresult ? "h-0" : "h-auto"
-        }`}
-        style={{ display: noresult ? "none" : "block" }}
-      >
-        {result.length > 0 && (
-          <div className="flex flex-wrap justify-start p-6 gap-10 bg-white">
-            {result.map((item, index) => (
-              <Cardpest data={item} key={index} index={index} />
-            ))}
-          </div>
-        )}
-        {noresult && !loading && <p>No results found</p>}
-      </div>
+      {/* Search Popup */}
+      {showPopup && (
+        <div className="absolute top-20 end-0 top-25 transform -translate-x-1/2 bg-white shadow-lg rounded-lg p-4 w-[60vw] z-50">
+          <h3 className="text-xl font-semibold text-gray-700 mb-2">Search Results</h3>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+              {result.slice(0, 7).map((item, index) => (
+                <Link  to={`/user/product/id/${item.id}`}  key={index} className="border p-3 rounded-lg shadow-md min-w-[200px]">
+                  <img src={item.productimage} alt={item.productname} className="w-[10vw] h-[10vw] object-contain mx-auto" />
+                  <h4 className="text-center text-lg font-semibold mt-2">{item.productname}</h4>
+                  <p className="text-center text-gray-600">{item.productcompanyname}</p>
+                  <p className="text-center text-green-700 font-bold">{item.afterdiscount} RS</p>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

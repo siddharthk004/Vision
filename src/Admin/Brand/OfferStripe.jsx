@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Axios from "../../Axios";
 import Navbar from "../Screen/Navbar";
 
-function HomePageAdd() {
+function OfferStripe() {
   const [ads, setAds] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAdId, setSelectedAdId] = useState("");
@@ -68,19 +68,26 @@ function HomePageAdd() {
   return (
     <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Banner Manage</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Offer Stripe</h6>
+        </div>
+      </div>
       <ToastContainer />
 
-      <div className="flex items-center gap-2 mt-[3vw] p-[.1vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">AddManagement</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm">HomePage Add</h6>
+      <div className="w-[40vw] bg-white h-[4vw] text-[2vw] font-bold text-green-800 text-center ml-[20vw]">
+      Offer Stripe
       </div>
-
 
       <div className="flex flex-col md:flex-row justify-center gap-6 mt-[2vw]">
         <div className="p-6 bg-white rounded-lg shadow-lg w-[40vw]">
-          <h3 className="text-green-600 font-bold text-center text-xl">Upload New Ad</h3>
+          <h3 className="text-green-600 font-bold text-center text-xl">
+            Upload New Offer
+          </h3>
           <input
             type="file"
             className="w-full border rounded p-2 mt-3"
@@ -88,41 +95,71 @@ function HomePageAdd() {
             onChange={handleFileChange}
           />
           <div className="flex justify-between mt-4">
-            <button className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-300 bg-gray-200" onClick={() => setSelectedFile(null)}>Clear</button>
-            <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" onClick={handleUploadAd} disabled={loading1}>
+            <button
+              className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-300 bg-gray-200"
+              onClick={() => setSelectedFile(null)}
+            >
+              Clear
+            </button>
+            <button
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              onClick={handleUploadAd}
+              disabled={loading1}
+            >
               {loading1 ? "Uploading..." : "Submit"}
             </button>
           </div>
         </div>
 
         <div className="p-6 bg-white rounded-lg shadow-lg w-[30vw]">
-          <h3 className="text-red-600 font-bold text-center text-xl">Delete Ad</h3>
+          <h3 className="text-red-600 font-bold text-center text-xl">
+            Delete Offer
+          </h3>
           <select
             className="w-full border rounded p-2 mt-3"
             onChange={(e) => setSelectedAdId(e.target.value)}
             value={selectedAdId}
           >
             <option value="">-- Select Ad --</option>
-            {ads.filter(ad => ad.id !== 1).map(ad => (
-              <option key={ad.id} value={ad.id}>Ad {ad.id}</option>
-            ))}
+            {ads
+              .filter((ad) => ad.id !== 1)
+              .map((ad) => (
+                <option key={ad.id} value={ad.id}>
+                  Ad {ad.id}
+                </option>
+              ))}
           </select>
           <div className="flex justify-between mt-4">
-            <button className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-300 bg-gray-200" onClick={() => setSelectedAdId("")}>Clear</button>
-            <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onClick={handleDeleteAd} disabled={loading2}>
+            <button
+              className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-300 bg-gray-200"
+              onClick={() => setSelectedAdId("")}
+            >
+              Clear
+            </button>
+            <button
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              onClick={handleDeleteAd}
+              disabled={loading2}
+            >
               {loading2 ? "Deleting..." : "Delete"}
             </button>
           </div>
         </div>
       </div>
 
-      <h2 className="text-center text-blue-600 font-bold text-2xl mt-6">Running Ads</h2>
-      <div className="container mx-auto p-6 bg-white rounded-lg shadow-lg">
-        <div className="grid grid-cols-1 gap-[2vw]">
-          {ads.slice(1,).map(ad => (
+      <h2 className="text-center text-blue-600 font-bold text-2xl mt-6">
+        Running Offers
+      </h2>
+      <div className="w-[70vw] mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <div className="gap-[2vw]">
+          {ads.slice(1).map((ad) => (
             <div key={ad.id} className="justify-items-center text-center">
               <h6>{ad.id}</h6>
-              <img src={ad.addurl} className=" h-[20vw] rounded-lg shadow" alt="Uploaded Ad" />
+              <img
+                src={ad.addurl}
+                className=" h-[19vw] rounded-lg shadow"
+                alt="Uploaded Ad"
+              />
             </div>
           ))}
         </div>
@@ -131,4 +168,4 @@ function HomePageAdd() {
   );
 }
 
-export default HomePageAdd;
+export default OfferStripe;

@@ -13,7 +13,7 @@ import Abouts from "../About/Abouts";
 import GrowthAds from "../AddDisplay/GrowthAds";
 import Stripes from "../AddDisplay/Stripes"; 
 import StripesDet from "../AddDisplay/StripesDet";
-import "./index.css"; // Import CSS for hiding scrollbar
+import "../../components/index.css"; // Import CSS for hiding scrollbar
 
 function HomePage() { 
   return (

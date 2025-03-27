@@ -12,28 +12,20 @@ function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  // Update handleSubmit to be async
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (username === "" || password === "") {
-      toast.error("Please enter both username and password", {
-        autoClose: 2000,
-      });
+      toast.error("Please enter both username and password", { autoClose: 2000 });
       return;
     }
-
+  
     try {
-      const response = await Axios().post("/user/login", {
-        username,
-        password,
-      });
-
-      if (response.status === 200) {
-        // Save email in localStorage (assuming API response includes an email field)
-        localStorage.setItem("token", response.token);
-
-        // Navigate to another page (e.g., Home or Profile)
+      const response = await Axios().post("/user/login", { username, password });
+  
+      if (response.status === 200 && response.data.token) { // Ensure response has a token
+        localStorage.setItem("token", response.data.token);  // Store token correctly
+        // console.log("Token stored:", response.data.token);
         navigate("/");
       } else {
         toast.error("Invalid username or password");
@@ -43,6 +35,7 @@ function Login() {
       toast.error("Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <div>

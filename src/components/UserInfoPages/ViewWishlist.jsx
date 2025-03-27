@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import React, { useCallback, useState } from "react";
 import { CgArrowTopRightR } from "react-icons/cg";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdOutlineShoppingCart } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "../../Axios";
-import { useNavigate } from "react-router-dom";
 
-function ViewWishlist({ data, ind, onDelete }) {
-  const [isCartAdded, setCartAdded] = useState(false); // Track if the product is in the wishlist
-  const navigate = useNavigate(); // Use the useNavigate hook for navigation
-  
+function ViewWishlist({ data,ind, onDelete }) {
+  const [isCartAdded, setCartAdded] = useState(false);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
   const cartData = {
     productname: data.productname,
     productcompanyname: data.productcompanyname,
@@ -19,103 +19,94 @@ function ViewWishlist({ data, ind, onDelete }) {
   };
 
   const handleBuy = () => {
-    navigate("/buyproduct", {
-      state: {
-        productname: data.productname,
-        productcompanyname: data.productcompanyname,
-        productimage: data.productimage,
-        beforediscount: data.beforediscount,
-        afterdiscount: data.afterdiscount,
-        discount: data.discount,
-      }, 
-    });
+    navigate("/buyproduct", { state: cartData });
   };
 
-  const deleteItemCart = async () => {
-    const id = data.id;
-    console.log("Deleting item:", id);
-
+  const deleteItemCart = useCallback(async () => {
     try {
-      const response = await Axios().delete(`/user/DeleteWishList/${id}`);
-      console.log("Response:", response.data);
+      const response = await Axios().delete(`/user/wishlist/delete/${data.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-      // Notify parent component to refresh the list
-      onDelete(id);
-
-      // Optionally display a success message
-      // alert("Item deleted successfully!");
+      if (response.status === 200) {
+        onDelete(ind);
+        window.location.reload(); // Reloads the page
+      }
     } catch (error) {
       console.error("Error deleting item:", error.response?.data || error.message);
-      // alert("Error deleting item.");
     }
-  };
+  }, [ind, onDelete, token]);
 
-  const addtoCart = async () => {
+  const addToCart = useCallback(async () => {
     if (isCartAdded) return;
-
-    const email = localStorage.getItem("email");
 
     try {
       const response = await Axios().post(`/user/cart`, cartData, {
-        params: { email },
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
 
-      console.log("Response:", response.data);
-      setCartAdded(true);
+      if (response.status === 200) {
+        setCartAdded(true);
+      }
     } catch (error) {
       console.error("Error adding to cart:", error.response?.data || error.message);
     }
-  };
+  }, [isCartAdded, cartData, token]);
 
   return (
-    <div className="" key={ind}>
-      <div className="flex justify-between shadow-2xl shadow-zinc-600 border-2 border-zinc-400 w-[91vh] h-40 p-4 mt-14 ml-14 mr-8 rounded-xl">
-        <div className="h-full w-30 rounded-xl">
-          <img src={data.productimage} className="h-full ml-[25%]" />
+    <div className="shadow-xl shadow-zinc-200 border-[.1vw] border-zinc-300 w-[46vw] h-40 p-4 mt-[2vw] ml-[2vw] rounded-xl flex justify-between items-center">
+      {/* Image & Title */}
+      <Link to={`/user/product/id/${data.pId}`} className="flex items-center">
+        <div>
+          <img src={data.productimage} alt={data.productname} className="h-[10vw] p-2 w-[10vw] object-contain rounded-lg" />
         </div>
-        <div className="h-full mt-4 w-80">
-          <h1 className="text-3xl w-[100%] mt-4 ml-3 mb-4 font-semibold leading-none text-center">
+        <div className="ml-4">
+          <h1 className="text-2xl font-semibold text-center">
             {data.productname}
           </h1>
-          <h1 className="text-xl font-lightbold leading-none text-center">
+          <h1 className="text-xl font-light text-center text-gray-600">
             {data.productcompanyname}
           </h1>
         </div>
+      </Link>
 
-        <div className="mt-8">
-          <h1 className="text-2xl font-bold text-green-700">
-            {data.afterdiscount} RS
-          </h1>
-          <s className="text-xl font-lightbold text-red-700">
-            {data.beforediscount} RS
-          </s>
-        </div>
+      {/* Price Section */}
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-green-700">{data.afterdiscount} RS</h1>
+        <s className="text-xl font-light text-red-700">{data.beforediscount} RS</s>
+      </div>
 
-        <div className="mt-2">
+      {/* Actions */}
+      <div className="flex gap-4">
+        <div>
+          {/* Buy Button */}
           <button
-            onClick={addtoCart}
-            className={`rounded-md bg-green-300 h-12 w-24 mb-4 flex border-green-500 border ${
-              isCartAdded ? "text-green-100 text-white cursor-not-allowed" : ""
+            onClick={handleBuy}
+            className="flex mb-2 items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md border border-green-500"
+          >
+            <CgArrowTopRightR className="w-6 h-6" />
+            <span className="text-lg font-bold">Buy</span>
+          </button>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={addToCart}
+            className={`flex items-center justify-center rounded-md h-12 w-24 border ${
+              isCartAdded ? "bg-gray-400 text-white cursor-not-allowed" : "bg-green-400 border-green-500"
             }`}
             disabled={isCartAdded}
           >
-            <MdOutlineShoppingCart className="h-10 mt-1 ml-1 w-10" />
-            <h1 className="text-xl text-center mt-2 font-bold">Add</h1>
-          </button>
-          <button
-            onClick={handleBuy}
-            className="rounded-md bg-blue-600 text-white gap-2 h-12 w-24 flex mt-2 border-green-500 border"
-          >
-            <CgArrowTopRightR className="h-10 mt-1 ml-1 w-10" />
-            <h1 className="text-xl text-center mt-2 font-bold">Buy</h1>
+            <MdOutlineShoppingCart className="h-6 w-6 mr-2" />
+            <span>{isCartAdded ? "Added" : "Add"}</span>
           </button>
         </div>
 
-        <button onClick={deleteItemCart} className="mt-10 mr-4">
-          <div className="rounded-md border-2 border-red-500 text-white h-12 w-12 flex border-green-500 border">
-            <MdDeleteOutline className="h-12 w-10 ml-1 text-sm text-red-500" />
-          </div>
+        {/* Delete Button */}
+        <button onClick={deleteItemCart} className="m-2 rounded-md">
+          <MdDeleteOutline className="h-9 w-8 text-red-500" />
         </button>
       </div>
     </div>

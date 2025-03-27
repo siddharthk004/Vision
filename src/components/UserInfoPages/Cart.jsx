@@ -7,7 +7,7 @@ import ViewCart from './ViewCart';
 function Cart() {
   const [data, setData] = useState([]); // State to store fetched data
   const navigate = useNavigate(); // Initialize useNavigate
-  const email = localStorage.getItem("email"); // Retrieve email from localStorage
+  const token = localStorage.getItem("token"); // Retrieve token from localStorage
 
   const handleDelete = (id) => {
     // Update the data state to exclude the deleted item
@@ -18,14 +18,14 @@ function Cart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Redirect to login if email is null
-        if (!email) {
+        // Redirect to login if token is null
+        if (!token) {
           navigate("/signin");
           return;
         }
 
-        const response = await Axios().get('/user/ViewAllcart', {
-          params: { email }, // Include email as a query parameter
+        const response = await Axios().get('/viewAllCart', {
+          headers: { Authorization: token ? `Bearer ${token}` : "" },
         });
         setData(response.data); // Set the fetched data in state
       } catch (error) {
@@ -34,14 +34,14 @@ function Cart() {
     };
 
     fetchData();
-  }, [email, navigate]); // Add dependencies to re-run if email or navigate changes
+  }, [token, navigate]); // Add dependencies to re-run if token or navigate changes
 
   return (
     <div>
       <Home />
-      <div className="h-full w-screen flex flex-wrap">
+      <div className="h-full w-screen flex flex-wrap grid grid-cols-2">
         {data.map((item, index) => (
-          <ViewCart data={item} key={index} ind={index} onDelete={handleDelete} />
+          <ViewCart data={item.product} quantity={item.quantity} key={index} ind={index} onDelete={handleDelete} >{console.log(item)}</ViewCart>
         ))}
       </div>
     </div>

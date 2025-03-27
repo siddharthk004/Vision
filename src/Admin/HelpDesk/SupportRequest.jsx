@@ -58,16 +58,18 @@ function SupportRequest() {
   };
 
   return (
-    <div className="overflow-hidden bg-gray-100 pl-[4vw]">
-      <ToastContainer />
+    <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
-
-      <div className="flex items-center gap-2 mt-[4vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">Help Desk</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm font-semibold">Support Request</h6>
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Help Desk</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Support Request</h6>
+        </div>
       </div>
+      <ToastContainer />
 
       <div className="flex justify-between items-center p-4">
         <h6 className="text-lg font-semibold">Support Requests</h6>

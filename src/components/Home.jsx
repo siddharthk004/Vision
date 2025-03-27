@@ -7,7 +7,7 @@ function Home() {
     <div>
       <MainNavbar />
       <Navbar />
-      <hr className="h-[.1vw] bg-zinc-600" />
+      <hr className="h-[.1vw] opacity-50 bg-zinc-600" />
     </div>
   );
 }

@@ -52,14 +52,17 @@ function LogoManagement() {
   return (
     <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Add Manage</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Logo</h6>
+        </div>
+      </div>
       <ToastContainer />
 
-      <div className="flex items-center gap-2 mt-[3vw] p-[.1vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">AddManagement</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm">Logo</h6>
-      </div>
 
 
       <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10">

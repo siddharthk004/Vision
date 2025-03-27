@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Axios from "../../Axios";
 import Navbar from "../Screen/Navbar";
 
-function GrowthAdd() {
+function ProductAdd() {
   const [ads, setAds] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAdId, setSelectedAdId] = useState("");
@@ -68,16 +68,18 @@ function GrowthAdd() {
   return (
     <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Add Manage</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Product Add</h6>
+        </div>
+      </div>
       <ToastContainer />
 
-      <div className="flex items-center gap-2 mt-[3vw] p-[.1vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">AddManagement</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm">Growth Add</h6>
-      </div>
-
-      <div className="w-[40vw] bg-white h-[4vw] text-[2vw] font-bold text-green-800 text-center ml-[20vw]">Growth Add</div>
+      <div className="w-[40vw] bg-white h-[4vw] text-[2vw] font-bold text-green-800 text-center ml-[20vw]">Product Add</div>
       <div className="flex flex-col md:flex-row justify-center gap-6 mt-[2vw]">
         <div className="p-6 bg-white rounded-lg shadow-lg w-[40vw]">
           <h3 className="text-green-600 font-bold text-center text-xl">
@@ -163,4 +165,4 @@ function GrowthAdd() {
   );
 }
 
-export default GrowthAdd;
+export default ProductAdd;

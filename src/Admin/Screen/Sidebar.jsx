@@ -215,7 +215,7 @@ function SideBar() {
           <Link to="/admin/AddManagement/GrowthAdd" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
               <AiFillDingtalkCircle className="text-red-700 mr-[.4vw] " />{" "}
-              Growth Add
+              Product Add
             </p>
           </Link>
         </motion.ul>
@@ -290,21 +290,9 @@ function SideBar() {
           }
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Link to="/admin/home" className="sidebar-link">
+          <Link to="/admin/category" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <TbCategoryFilled className="text-cyan-600 mr-[.4vw]" /> New
-              Category
-            </p>
-          </Link>
-          <Link to="/admin/Team" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <GrDocumentUpdate className="text-blue-800 mr-[.4vw]" /> Update
-              Category
-            </p>
-          </Link>
-          <Link to="/admin/Team" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <MdAutoDelete className="text-red-600 mr-[.4vw]" /> Delete
+              <TbCategoryFilled className="text-cyan-600 mr-[.4vw]" /> 
               Category
             </p>
           </Link>
@@ -335,27 +323,15 @@ function SideBar() {
           }
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Link to="/admin/home" className="sidebar-link">
+          <Link to="/admin/offer" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <TbCategoryFilled className="text-cyan-600 mr-[.4vw]" />{" "}
-              Announcement Banner
+              <GrDocumentUpdate className="text-blue-800 mr-[.4vw]" /> Offer Stripe
             </p>
           </Link>
-          <Link to="/admin/Team" className="sidebar-link">
+          <Link to="/admin/brand" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <GrDocumentUpdate className="text-blue-800 mr-[.4vw]" /> Promo
-              Banner
-            </p>
-          </Link>
-          <Link to="/admin/Team" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <BsMicrosoftTeams className="text-yellow-600 mr-[.4vw]" /> Add New
+              <BsMicrosoftTeams className="text-yellow-600 mr-[.4vw]" /> 
               Brand
-            </p>
-          </Link>
-          <Link to="/admin/Team" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <MdAutoDelete className="text-red-600 mr-[.4vw]" /> Delete Brand
             </p>
           </Link>
         </motion.ul>
@@ -385,28 +361,22 @@ function SideBar() {
           }
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Link to="/admin/home" className="sidebar-link">
+          <Link to="/admin/abouttext" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
               <MdOutlineBrowserUpdated className="text-cyan-600 mr-[.4vw]" />{" "}
               Update About Text
             </p>
           </Link>
-          <Link to="/admin/Team" className="sidebar-link">
+          <Link to="/admin/contact" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
               <IoMdContacts className="text-blue-800 mr-[.4vw]" /> Update
               Contact
             </p>
           </Link>
-          <Link to="/admin/Team" className="sidebar-link">
+          <Link to="/admin/social" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
               <IoEarthOutline className="text-red-600 mr-[.4vw]" /> Update
               Social Handle
-            </p>
-          </Link>
-          <Link to="/admin/Team" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <PiUserGearThin className="text-orange-800 mr-[.4vw]" /> Update
-              Quick
             </p>
           </Link>
         </motion.ul>
@@ -437,7 +407,7 @@ function SideBar() {
           }
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Link to="/admin/home" className="sidebar-link">
+          <Link to="/admin/comment" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
               <MdOutlineBrowserUpdated className="text-cyan-600 mr-[.4vw]" />{" "}
               View comments
@@ -471,24 +441,14 @@ function SideBar() {
           }
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Link to="/admin/home" className="sidebar-link">
+          <Link to="/admin/user" className="sidebar-link">
             <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <FaUsersLine className="text-cyan-600 mr-[.4vw]" /> View All User
-            </p>
-          </Link>
-          <Link to="/admin/home" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <FaBan className="text-violet-600 mr-[.4vw]" /> Ban User
-            </p>
-          </Link>
-          <Link to="/admin/home" className="sidebar-link">
-            <p className=" sidebar-item flex items-center hover:bg-zinc-200 rounded-[.4vw] pl-[.5vw] pt-[.3vw] pb-[.3vw]">
-              <MdAutoDelete className="text-red-600 mr-[.4vw]" /> Delete User
+              <FaUsersLine className="text-cyan-600 mr-[.4vw]" /> View User
             </p>
           </Link>
         </motion.ul>
 
-        {/* Quick Link Section */}
+        {/* Quick Link Section
         <div
           className="flex justify-between items-center cursor-pointer"
           onClick={() => toggleSection("quick")}
@@ -504,7 +464,7 @@ function SideBar() {
         </div>
 
         {/* Dropdown Items with Smooth Animation */}
-        <motion.ul
+        {/* <motion.ul
           className="space-y-2 pl-[.9vw] mt-[.2vw] text-[1vw] mb-[.5vw] font-medium overflow-hidden"
           initial={{ height: 0, opacity: 0 }}
           animate={
@@ -559,7 +519,7 @@ function SideBar() {
               <CiLink className="text-red-600 mr-[.4vw]" /> Update Career Link
             </p>
           </Link>
-        </motion.ul>
+        </motion.ul>  */}
       </div>
     </div>
   );

@@ -13,49 +13,33 @@ const EditProfile = () => {
   const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-
-  const email = localStorage.getItem('email');
+  
+  const email = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    const userData = {
-      email,
-      endname: endname || null,
-      address: address || null,
-      contact: contact || null,
-      occupation: occupation || null,
-    };
+    const userData = { email, endname, address, contact, occupation };
 
-    // Append JSON data as a Blob
-    formData.append(
-      "data",
-      new Blob([JSON.stringify(userData)], { type: "application/json" })
-    );
-
-    // Append the image file if it exists
-    if (image) {
-      formData.append("image", image);
-    }
+    formData.append("data", new Blob([JSON.stringify(userData)], { type: "application/json" }));
+    if (image) formData.append("image", image);
 
     setIsSubmitting(true);
-
+    
     try {
       const response = await Axios().post("/user/editprofile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
-
+      
       if (response.status === 200) {
-        toast.success("Profile Edited Successfully!", { autoClose: 2000 });
+        toast.success("Profile Updated Successfully!", { autoClose: 2000 });
         navigate("/profileSection");
       } else {
-        toast.error("Profile edit failed. Please try again.", { autoClose: 2000 });
+        toast.error("Profile update failed. Please try again.", { autoClose: 2000 });
       }
     } catch (error) {
-      console.error("Error during Edit:", error);
+      console.error("Error updating profile:", error);
       toast.error("Something went wrong. Please try again.", { autoClose: 2000 });
     } finally {
       setIsSubmitting(false);
@@ -63,76 +47,75 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col items-center">
       <Home />
-      <div className="bg-green-300 w-full h-[95vh] pt-4 pl-[50vh] m-auto bg-gradient-to-l from-green-300 via-white to-orange-300">
-        <div className="bg-blue-100 h-[62%] mt-[6%] w-[70%] border-2 border-gray-300 rounded-3xl shadow-2xl shadow-zinc-600">
-          <h1 className="text-4xl text-center font-bold mb-2 mt-2">
-            Edit Profile
-          </h1>
-
-          <form onSubmit={handleSubmit}>
-            <div className="pl-12 w-[75%] mt-5 flex gap-20">
-              <h1 className="text-2xl mt-6 font-semibold">Endname</h1>
-              <input
-                type="text"
-                value={endname}
-                onChange={(e) => setEndName(e.target.value)}
-                placeholder="length should 5+"
-                className="w-2/3 px-6 py-4 ml-2 mt-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              />
-            </div>
-            <div className="pl-12 w-[75%] mt-5 flex gap-20">
-              <h1 className="text-2xl mt-6 font-semibold">Address </h1>
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="length should 5+"
-                className="w-2/3 px-6 py-4 mt-3 ml-6 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              />
-            </div>
-            <div className="pl-12 w-[75%] mt-5 flex gap-20">
-              <h1 className="text-2xl mt-6 font-semibold">Contact </h1>
-              <input
-                type="text"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                placeholder="+91"
-                className="w-2/3 px-6 py-4 mt-3 ml-[25px] border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              />
-            </div>
-            <div className="pl-12 w-[75%] mt-5 flex gap-16">
-              <h1 className="text-2xl mt-6 font-semibold">Occupation </h1>
-              <input
-                type="text"
-                value={occupation}
-                onChange={(e) => setOccupation(e.target.value)}
-                placeholder="eg: Student"
-                className="w-2/3 px-6 py-4 mt-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              />
-            </div>
-            <div className="pl-12 w-[75%] mt-5 flex gap-16">
-              <h1 className="text-2xl mt-6 font-semibold">Image </h1>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setImage(e.target.files[0])}
-                className="mt-6 ml-14"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isSubmitting} // Disable button while submitting
-              className=" hover:bg-green-700 hover:text-white bg-green-600 h-14 w-40 m-2 ml-[40%] rounded-3xl text-xl font-bold text-zinc-700"
-            >
-              {isSubmitting ? "Saving..." : "Save"}{" "}
-              {/* Show loading text */}
-            </button>
-          </form>
-        </div>
+      <div className="bg-white shadow-md rounded-lg p-8 mt-10 w-full max-w-3xl">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Edit Profile</h1>
+        
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Endname</label>
+            <input
+              type="text"
+              value={endname}
+              onChange={(e) => setEndName(e.target.value)}
+              placeholder="Enter endname"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Address</label>
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Enter address"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Contact</label>
+            <input
+              type="text"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              placeholder="Enter contact number"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Occupation</label>
+            <input
+              type="text"
+              value={occupation}
+              onChange={(e) => setOccupation(e.target.value)}
+              placeholder="Enter occupation"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Profile Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+          
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 disabled:opacity-50"
+          >
+            {isSubmitting ? "Saving..." : "Save Changes"}
+          </button>
+        </form>
       </div>
-      {/* ToastContainer for showing toasts */}
       <ToastContainer />
     </div>
   );

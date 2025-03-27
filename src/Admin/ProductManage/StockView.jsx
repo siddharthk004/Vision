@@ -30,12 +30,14 @@ function StockView() {
   return (
     <div className="overflow-hidden bg-gray-100 p-[.5vw]">
       <Navbar />
-
-      <div className="flex items-center gap-2 mt-[3vw] p-[.1vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">Product</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm font-semibold">Add</h6>
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Product</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">View Low Stock</h6>
+        </div>
       </div>
 
       <div className="max-w-5xl mx-auto mt-6 p-4 bg-white shadow-md rounded-lg">

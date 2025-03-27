@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Axios from "../Axios";
-import Cardpest from "./Card";
+import Card from "./Card";
 import Exclusive from "./Category/Exclusive";
 import Home from "./Home";
+import "./index.css"; // Import CSS for hiding scrollbar
 
 function Pesticide() {
   const [data, setData] = useState([]); // Store fetched data in state
   const [currentPage, setCurrentPage] = useState(1); // Current page number
-  const itemsPerPage = 24; // Number of items per page
+  const itemsPerPage = 25; // Number of items per page
 
   // Fetch the data from the API when the component mounts
   useEffect(() => {
@@ -34,14 +35,14 @@ function Pesticide() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className="bg-zinc-100 overflow-hidden no-scrollbar h-screen overflow-y-scroll">
       <Home />
-      <Exclusive value={"Pesticide Products"} />
+      <Exclusive  value={"Pesticide Products"} />
 
       <div className="flex p-8 flex-row flex-wrap justify-between bg-zinc-100 w-full">
         {/* Map through the current items and render a Card for each */}
         {currentItems.map((item, index) => (
-          <Cardpest data={item} key={index} index={index} />
+          <Card data={item} key={index} index={index} />
         ))}
       </div>
 

@@ -85,16 +85,18 @@ function UpdateProduct() {
 
   return (
     <div className="overflow-hidden bg-gray-100 p-[.5vw]">
-      <ToastContainer />
       <Navbar />
-      
-      <div className="flex items-center gap-2 mt-[3vw] p-[.1vw] text-gray-700">
-        <IoIosHome className="w-[1.3vw] h-[1.3vw]" />
-        <h6 className="text-sm">Product</h6>
-        <h6 className="text-sm">/</h6>
-        <h6 className="text-sm font-semibold">Update</h6>
+      {/* Breadcrumb */}
+      <div className="mt-[3vw]">
+        <div className="flex items-center space-x-2 text-gray-700">
+        <IoIosHome className="w-[1.3vw] h-[1.3vw]"/>
+          <h6>Product</h6>
+          <h6>/</h6>
+          <h6 className="text-sm">Update</h6>
+        </div>
       </div>
-      <div className="max-w-3xl mx-auto bg-white shadow-lg p-6 rounded-lg">
+      <ToastContainer />
+      <div className="max-w-3xl mx-auto bg-white shadow-lg p-4 rounded-lg">
         <h2 className="text-center text-blue-600 text-xl font-bold">Update Product</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
