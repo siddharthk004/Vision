@@ -128,7 +128,7 @@ function Card({ data, index }) {
           </p>
         </Link>
 
-        <div className="flex gap-[.2vw] ml-[1.3vw] w-[10vw] justify-center mt-[.4vw] text-zinc-700">
+        <div className="flex gap-[1.7vw] ml-[1.3vw] w-[10vw] justify-center mt-[.4vw] text-zinc-700">
           {/* ✅ Add to Cart Button with Disabled Styling */}
           <button
             onClick={addToCart}
@@ -143,14 +143,14 @@ function Card({ data, index }) {
           {/* ✅ Buy Button */}
           <button
             onClick={() => navigate("/buyproduct", { state: data })}
-            className={`rounded-md bg-blue-600 text-white h-[2.5vw] w-[6vw] flex border border-zinc-100 ${
+            className={`rounded-md  bg-blue-600 text-white h-[2.5vw] w-[6vw] flex border border-zinc-100 ${
               data.quantity === 0
                 ? "text-blue-100 bg-zinc-100 cursor-not-allowed"
                 : "hover:bg-blue-500 hover:text-white"
             }`}
           >
             <CgArrowTopRightR className="h-[4vw] w-[1.6vw] pb-[1.7vw] ml-[.6vw] text-[.2vw]" />
-            <p className="m-[.3vw] font-semibold text-[1vw]">Buy</p>
+            <p className="m-[.3vw]  font-semibold text-[1vw]">Buy</p>
           </button>
         </div>
       </div>

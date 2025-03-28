@@ -5,9 +5,9 @@ import Navbar from "./Home/Navbar";
 function Home() {
   return (
     <div>
-      <MainNavbar />
+      {/* <MainNavbar /> */}
       <Navbar />
-      <hr className="h-[.1vw] opacity-50 bg-zinc-600" />
+      <hr className="h-[.1vw] opacity-50 pt-[4vw] bg-zinc-600" />
     </div>
   );
 }

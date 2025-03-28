@@ -51,7 +51,7 @@ function Ad () {
           />
         ))} */}
       <img
-        className="h-[39.5vw] w-[100vw] overflow-hidden transition-opacity duration-500"
+        className="h-[43.4vw] w-[100vw] overflow-hidden transition-opacity duration-500"
         src={image}
         alt="" />
     </div>
